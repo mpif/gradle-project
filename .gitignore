@@ -1,0 +1,12 @@
+bin/
+out/
+.idea/
+.gradle/
+build/
+.myeclipse/
+.settings/
+classes/
+target/
+*.iml
+*.class
+*.iml

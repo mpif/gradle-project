@@ -1,0 +1,65 @@
+
+//所有子module共同的配置
+subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    apply plugin: "idea"
+
+    ext {
+        compileJava.options.encoding = 'UTF-8'
+        compileTestJava.options.encoding = 'UTF-8'
+        junitVersion = "4.13"
+        springVersion = "4.3.28.RELEASE"
+        slf4jVersion = "1.7.30"
+        log4j2Version = "2.13.3"
+        disruptorVersion = "3.4.2"
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    compileJava.options.encoding = 'UTF-8'
+    compileTestJava.options.encoding = 'UTF-8'
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    //配置依赖
+    dependencies {
+        compile "org.springframework:spring-context:${springVersion}"
+        compile "org.slf4j:slf4j-api:${slf4jVersion}"
+        compile "org.apache.logging.log4j:log4j-slf4j-impl:${log4j2Version}"
+        compile "org.apache.logging.log4j:log4j-core:${log4j2Version}"
+        compile "org.apache.logging.log4j:log4j-api:${log4j2Version}"
+        compile "com.lmax:disruptor:${disruptorVersion}"
+        testCompile("junit:junit:${junitVersion}")
+    }
+
+    repositories {
+
+        maven {
+            url "http://artifactory.jd.com/libs-snapshots"
+        }
+
+        maven {
+            url "http://artifactory.jd.com/libs-releases"
+        }
+
+        maven {
+//            url "http://maven.aliyun.com/nexus/content/groups/public/"
+//            url "https://maven.aliyun.com/repository/public"
+            url "https://maven.aliyun.com/repository/public/"
+        }
+
+        mavenCentral()
+
+    }
+
+}
+
+task mycopy(type: Copy, group: "copy Task Group", description: "Copies sources to the dest directory") {
+    from "src"
+    into "dest"
+}
+

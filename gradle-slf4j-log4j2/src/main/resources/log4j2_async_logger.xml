@@ -1,0 +1,17 @@
+<Configuration status="ERROR">
+    <Appenders>
+        <RollingFile name="async-appender" filePattern="D:/Logs/gradle-slf4j-log4j2-%d{yyyy-MM-dd}.log" fileName="D:/Logs/gradle-slf4j-log4j2.log" immediateFlush="true">
+            <PatternLayout pattern="[%-5p %l %t %d{yyyy-MM-dd HH:mm:ss,SSS}]  %m%n" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5MB"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <AsyncLogger name="cn.gradle" level="INFO" additivity="false">
+            <AppenderRef ref="async-appender" />
+        </AsyncLogger>
+    </Loggers>
+</Configuration>
